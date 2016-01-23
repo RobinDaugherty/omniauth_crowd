@@ -1,8 +1,8 @@
-# omniauth_crowd
+# omniauth_crowd [![Build Status](https://travis-ci.org/robdimarco/omniauth_crowd.svg?branch=master)](https://travis-ci.org/robdimarco/omniauth_crowd)
 
-The omniauth_crowd library is an OmniAuth provider that supports authentication against Atlassian Crowd REST apis.
+The omniauth_crowd library is an OmniAuth provider that supports authentication against Atlassian Crowd.
 
-[![Build Status](https://travis-ci.org/robdimarco/omniauth_crowd.svg?branch=master)](https://travis-ci.org/robdimarco/omniauth_crowd)
+A form is presented to the user within your application, where they are asked to enter their credentials.
 
 ## Helpful links
 
@@ -11,20 +11,33 @@ The omniauth_crowd library is an OmniAuth provider that supports authentication 
 * [Atlassian Crowd](http://www.atlassian.com/software/crowd/)
 * [Atlassian Crowd REST API](http://confluence.atlassian.com/display/CROWDDEV/Crowd+REST+APIs)
 
-## Install and use
+## Using this provider
 
-### 1. Add the OmniAuth Crowd REST plugin to your Gemfile
+If you're not already using OmniAuth in your project, see [OmniAuth](https://github.com/intridea/omniauth/) for more information.
 
-    gem 'omniauth', '>= 1.0.0'  # We depend on this
-    gem "omniauth_crowd"
+### Add this gem to your Gemfile
 
-### 2. You will need to configure OmniAuth to use your crowd authentication.  This is generally done in Rails in the config/initializers/omniauth.rb with...
+```ruby
+gem "omniauth", '>= 1.0'
+gem "omniauth_crowd"
+```
 
-    Rails.application.config.middleware.use OmniAuth::Builder do
-      provider :crowd, :crowd_server_url=>"https://crowd.mycompanyname.com/crowd", :application_name=>"app", :application_password=>"password"
-    end
+### Add to OmniAuth configuration
 
-You will need to supply the correct server URL, application name and password
+In Rails, this is generally done in `config/initializers/omniauth.rb`:
+
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :crowd, 
+           crowd_server_url: "https://crowd.mycompanyname.com/crowd",
+           application_name: "this app",
+           application_password: "password"
+end
+```
+
+* `crowd_server_url`: URL of the Crowd server.
+* `application_name`: The name given to this application as set up in the Crowd server.
+* `application_password`: The password assigned to this application in the Crowd server.
 
 ## Contributing to omniauth_crowd
  
@@ -40,4 +53,3 @@ You will need to supply the correct server URL, application name and password
 
 Copyright (c) 2011-14 Rob Di Marco. See LICENSE.txt for
 further details.
-
